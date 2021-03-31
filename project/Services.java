@@ -12,7 +12,6 @@ public class Services {
         return mancare;
     }
     public static void adaugaMancare(int dificultate, String nume){
-
         mancare.add(new Mancare(dificultate, nume));
     }
 
@@ -31,8 +30,6 @@ public class Services {
     public static void adaugaSofer(String nume, String prenume, String gen, int varsta, int salariu, int vechime, String vehicul, int experienta, boolean inCursa){
         sofer.add(new Sofer(nume, prenume, gen, varsta, salariu, vechime,vehicul,experienta,inCursa));
     }
-
-
 
     //CLIENT
     private static Vector<Client> client = new Vector<Client>();

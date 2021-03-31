@@ -1,0 +1,31 @@
+Tema proiect -  Food Delivery - Iancu Francisc Andrei Sebastian Grupa 252 Anul 2
+
+
+Clase utilizate :
+
+-Mancare
+-Comanda
+-Local
+-Localitate
+-Persoana
+-Angajat ( Mosteneste clasa Persoana )
+-Client ( Mosteneste clasa Persoana )
+-Sofer ( Mosteneste clasa Angajat )
+-Bucatar ( Mosteneste clasa Angajat )
+
+Actiuni :
+Adaugare mancare
+Adaugare localitate
+Adaugare local
+Adaugare comanda
+Adaugare client
+Adaugare sofer
+Adaugare bucatar
+Inchide program
+Afiseaza toate mancarurile
+Afiseaza toate localitatile
+Afiseaza toate localurile
+Afiseaza toate comenzile
+Afiseaza toti clienti
+Afiseaza toti soferi
+Afiseaza toti bucatari

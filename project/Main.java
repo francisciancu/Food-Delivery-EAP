@@ -45,12 +45,16 @@ public class Main {
                         actiune = 0;
                     }
                 } while (actiune == 1);
-            } else if (choice == 2) {
+            }
+
+            else if (choice == 2) {
                 Services.getMancare().forEach((iteraror) -> {
                     System.out.println("Denumire mancare : " + iteraror.getDenumire());
                     System.out.println("Dificultate mancare : " + iteraror.getDificultate());
                 });
-            } else if (choice == 3) {
+            }
+
+            else if (choice == 3) {
                 do {
                     actiune = 1;
                     System.out.println("Introduceti numele localitatii : ");
