@@ -29,3 +29,6 @@ Afiseaza toate comenzile
 Afiseaza toti clienti
 Afiseaza toti soferi
 Afiseaza toti bucatari
+
+Etapa 2
+Adaugat "urmăritor de acțiuni" care monitorizeaza fiecare actiune si noteaza actiunea si timpul cand a fost executata
