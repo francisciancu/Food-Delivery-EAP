@@ -3,7 +3,6 @@ package project;
 //import java.util.*;
 //import java.util.Collections;
 //import java.util.Vector;
-
 import java.util.Scanner;
 
 
@@ -32,7 +31,7 @@ public class Main {
             choice = Integer.parseInt(scanner.nextLine());
             int actiune;
             if (choice == 1) {
-                do {actionTracker.getAction().trackAction("Adaugat mancare");
+                do {
                     actiune = 1;
                     System.out.println("Numele mancari :");
                     String den = scanner.nextLine();
@@ -46,18 +45,21 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
+                    addMancare.getMancare().mancareAdd(den,dif);
+                    actionTracker.getAction().trackAction("Adaugat mancare");
                 } while (actiune == 1);
             }
 
-            else if (choice == 2) {actionTracker.getAction().trackAction("Afisare lista mancare");
+            else if (choice == 2) {
                 Services.getMancare().forEach((iteraror) -> {
                     System.out.println("Denumire mancare : " + iteraror.getDenumire());
                     System.out.println("Dificultate mancare : " + iteraror.getDificultate());
                 });
+                actionTracker.getAction().trackAction("Afisare lista mancare");
             }
 
             else if (choice == 3) {
-                do {actionTracker.getAction().trackAction("Adaugare localitate");
+                do {
                     actiune = 1;
                     System.out.println("Introduceti numele localitatii : ");
                     String nume = scanner.nextLine();
@@ -84,8 +86,10 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
+                    addLocalitate.getLocalitate().localitateAdd(nume,loc,dBune,per);
+                    actionTracker.getAction().trackAction("Adaugare localitate");
                 } while (actiune == 1);
-            } else if (choice == 4) {actionTracker.getAction().trackAction("Afisare lista localitati");
+            } else if (choice == 4) {
                 Services.getLocalitate().forEach((iteraror) -> {
                     System.out.println("Numele localitati : " + iteraror.getDenumire());
                     System.out.println(" Numar de locuitori : " + iteraror.getNrLocuitori());
@@ -100,8 +104,9 @@ public class Main {
                         System.out.println("Localitatea nu este periculoasa ! ");
                     }
                 });
+                actionTracker.getAction().trackAction("Afisare lista localitati");
             } else if (choice == 5) {
-                do {actionTracker.getAction().trackAction("Adaugare local");
+                do {
                     actiune = 1;
                     System.out.println("Numele localului : ");
                     String nLoc = scanner.nextLine();
@@ -136,9 +141,10 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
-
+                    addLocal.getLocal().localAdd(nLoc,adr,nrAng,nrCl,nrMinPop,stele,livDB,livPer);
+                    actionTracker.getAction().trackAction("Adaugare local");
                 } while (actiune == 1);
-            } else if (choice == 6) {actionTracker.getAction().trackAction("Afisare localuri");
+            } else if (choice == 6) {
                 Services.getLocal().forEach((iteraror) -> {
                     System.out.println("Nume local : " + iteraror.getNume());
                     System.out.println("Adresa localului : " + iteraror.getAdresa());
@@ -154,8 +160,9 @@ public class Main {
                         System.out.println("Localul nu livreaza in localitati periculoase !");
                     }
                 });
+                actionTracker.getAction().trackAction("Afisare localuri");
             } else if (choice == 7) {
-                do {actionTracker.getAction().trackAction("Adaugare comanda");
+                do {
                     actiune = 1;
                     System.out.println("Numarul comenzi : ");
                     int nrCom = Integer.parseInt(scanner.nextLine());
@@ -172,16 +179,18 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
-
+                    actionTracker.getAction().trackAction("Adaugare comanda");
+                    addComanda.getComanda().comandaAdd(nrCom,timpPrep,nrProd);
                 } while (actiune == 1);
-            } else if (choice == 8) {actionTracker.getAction().trackAction("Afisare comenzi");
+            } else if (choice == 8) {
                 Services.getComanda().forEach((iteraror) -> {
                     System.out.println("Numarul comenzi este : " + iteraror.getNrComanda());
                     System.out.println("Timpul de preparare al comenzi este ( in minute ) : " + iteraror.getTimpPreparare());
                     System.out.println("Numarul de produse din comanda este de : " + iteraror.getNrProduse());
                 });
+                actionTracker.getAction().trackAction("Afisare comenzi");
             } else if (choice == 9) {
-                do {actionTracker.getAction().trackAction("Adaugare client");
+                do {
                     actiune = 1;
                     System.out.println("Numele clientului : ");
                     String numCl = scanner.nextLine();
@@ -210,8 +219,11 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
+                    addClient.getClient().clientAdd(numCl,prenCl,genCl,varsta,ast,nrComCl);
+                    actionTracker.getAction().trackAction("Adaugare client");
+
                 } while (actiune == 1);
-            } else if (choice == 10) {actionTracker.getAction().trackAction("Afisare clienti");
+            } else if (choice == 10) {
                 Services.getClient().forEach((iteraror) -> {
                     System.out.println("Numele clientului : " + iteraror.getNume());
                     System.out.println("Prenumele clientului : " + iteraror.getPrenume());
@@ -224,8 +236,10 @@ public class Main {
                         System.out.println("Clientul nu isi astepata comanda ! ");
                     }
                 });
+
+                actionTracker.getAction().trackAction("Afisare clienti");
             } else if (choice == 11) {
-                do {actionTracker.getAction().trackAction("Adaugare sofer");
+                do {
                     actiune = 1;
                     System.out.println("Numele soferului : ");
                     String numSof = scanner.nextLine();
@@ -260,8 +274,10 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
+                    actionTracker.getAction().trackAction("Adaugare sofer");
+                    addSofer.getSofer().soferAdd(numSof,prenSof,genSof,varSof,vecSof,vehicul,aniExp,inCursa);
                 } while (actiune == 1);
-            } else if (choice == 12) {actionTracker.getAction().trackAction("Afisare soferi");
+            } else if (choice == 12) {
                 Services.getSofer().forEach((iteraror) -> {
                     System.out.println("Numele soferului : " + iteraror.getNume());
                     System.out.println("Prenumele soferului : " + iteraror.getPrenume());
@@ -276,9 +292,11 @@ public class Main {
                     } else {
                         System.out.println("Soferul nu se afla in cursa ! ");
                     }
+                    actionTracker.getAction().trackAction("Afisare soferi");
+
                 });
             } else if (choice == 13) {
-                do {actionTracker.getAction().trackAction("Adaugare bucatar");
+                do {
                     actiune = 1;
                     System.out.println("Numele bucatarului :");
                     String numeB = scanner.nextLine();
@@ -307,8 +325,10 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
+                    addBucatar.getBucatar().bucatarAdd(numeB, prenB, G, V, VH, aXP, nIND);
+                    actionTracker.getAction().trackAction("Adaugare bucatar");
                 } while (actiune == 1);
-            } else if (choice == 14) {actionTracker.getAction().trackAction("Afisare bucatari");
+            } else if (choice == 14) {
                 Services.getBucatar().forEach((iteraror) -> {
                     System.out.println("Nume : " + iteraror.getNume());
                     System.out.println("Prenume : " + iteraror.getPrenume());
@@ -316,6 +336,7 @@ public class Main {
                     System.out.println("Gen : " + iteraror.getGen());
                     System.out.println("Nivel de indemanare : " + iteraror.getNivelIndemanare());
                 });
+                actionTracker.getAction().trackAction("Afisare bucatari");
             }
         } while (choice != 15);
         actionTracker.getAction().trackAction("Inchide program");
