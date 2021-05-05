@@ -1,7 +1,7 @@
 package project;
 
-//import java.util.*;
-//import java.util.Collections;
+import java.util.*;
+import java.util.Collections;
 //import java.util.Vector;
 import java.util.Scanner;
 
@@ -11,6 +11,7 @@ public class Main {
         actionTracker.getAction().trackAction("Deschis program");
         Scanner scanner = new Scanner(System.in);
         int choice;
+
         do {
             System.out.println("Doriti sa adaugati mancare? -> 1");
             System.out.println("Doriti sa afisati toate mancarurile ? -> 2");
@@ -26,7 +27,8 @@ public class Main {
             System.out.println("Doriti sa afisati toti soferi ? -> 12");
             System.out.println("Doriti sa adaugati un bucatar ? -> 13");
             System.out.println("Doriti sa afisati toti bucatari ? -> 14");
-            System.out.println("Doriti sa inchideti programul ? -> 15");
+            System.out.println("Doriti o meniu cu mancaruri sortat alfabetic ? -> 15");
+            System.out.println("Doriti sa inchideti programul ? -> 16");
             System.out.println("Introduceti raspunsul :");
             choice = Integer.parseInt(scanner.nextLine());
             int actiune;
@@ -56,8 +58,14 @@ public class Main {
                     System.out.println("Dificultate mancare : " + iteraror.getDificultate());
                 });
                 actionTracker.getAction().trackAction("Afisare lista mancare");
+            }else if (choice == 15){
+                ArrayList<String> al= new ArrayList<>();
+                Services.getMancare().forEach((iteraror) -> al.add(iteraror.getDenumire()));
+                Collections.sort(al);
+                for (String s : al) {
+                    System.out.println(s);
+                }
             }
-
             else if (choice == 3) {
                 do {
                     actiune = 1;
@@ -338,7 +346,7 @@ public class Main {
                 });
                 actionTracker.getAction().trackAction("Afisare bucatari");
             }
-        } while (choice != 15);
+        } while (choice != 16);
         actionTracker.getAction().trackAction("Inchide program");
         System.out.println("Programul se inchide ! Multumim !");
     }

@@ -24,4 +24,6 @@ public class Mancare {
     public void setDenumire(String denumire) {
         this.denumire = denumire;
     }
+
+
 }

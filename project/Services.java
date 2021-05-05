@@ -7,7 +7,7 @@ public class Services {
     }
 
     //MANCARE
-    private static Vector<Mancare> mancare = new Vector<Mancare>();
+    private static Vector<Mancare> mancare = fileReader.readMancare();
     public static Vector<Mancare> getMancare() {
         return mancare;
     }
@@ -16,7 +16,7 @@ public class Services {
     }
 
     //BUCATAR
-    private static Vector<Bucatar> bucatar = new Vector<Bucatar>();
+    private static Vector<Bucatar> bucatar = fileReader.readBucatar();
     public static Vector<Bucatar> getBucatar() {
         return bucatar;
     }
@@ -39,7 +39,7 @@ public class Services {
     }
 
     //LOCAL
-    private static Vector<Local> local = new Vector<Local>();
+    private static Vector<Local> local = fileReader.readLocal();
     public static Vector<Local> getLocal() { return local; }
     public static void adaugaLocal (boolean livreazaDrumuriStricate, boolean livreazaLocalitatiPericuloase, String nume, String adresa, int nrAngajati, int nrClienti, float stele, int nrMinimPopulatie){
         local.add(new Local(livreazaDrumuriStricate,livreazaLocalitatiPericuloase,nume,adresa,nrAngajati,nrClienti,stele,nrMinimPopulatie));
@@ -53,7 +53,7 @@ public class Services {
     }
 
     //COMANDA
-    private static Vector<Comanda> comanda = new Vector<Comanda>();
+    private static Vector<Comanda> comanda = fileReader.readComanda();
     public static Vector<Comanda> getComanda() { return comanda; }
     public static void adaugaComanda (int nrComanda, float timpPreparare, int nrProduse){
         comanda.add(new Comanda(nrComanda, timpPreparare, nrProduse));
