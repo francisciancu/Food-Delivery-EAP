@@ -18,7 +18,7 @@ public class actionTracker {
     int i=0;
     public void trackAction(String Actiune) {
         try{
-            FileWriter fw = new FileWriter("Logs.csv", true);
+            FileWriter fw = new FileWriter("src/project/Logs.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("\n");
             bw.write(i++ +","+ Actiune +","+ java.time.LocalDateTime.now());
