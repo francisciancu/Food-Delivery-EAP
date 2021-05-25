@@ -1,8 +1,5 @@
 package project;
 
-import java.util.*;
-import java.util.Collections;
-//import java.util.Vector;
 import java.util.Scanner;
 
 
@@ -10,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         actionTracker.getAction().trackAction("Deschis program");
         Scanner scanner = new Scanner(System.in);
+        MySQL.SqlConfig.getDataBaseConnection();
         int choice;
-
         do {
             System.out.println("Doriti sa adaugati mancare? -> 1");
             System.out.println("Doriti sa afisati toate mancarurile ? -> 2");
@@ -27,8 +24,15 @@ public class Main {
             System.out.println("Doriti sa afisati toti soferi ? -> 12");
             System.out.println("Doriti sa adaugati un bucatar ? -> 13");
             System.out.println("Doriti sa afisati toti bucatari ? -> 14");
-            System.out.println("Doriti o meniu cu mancaruri sortat alfabetic ? -> 15");
-            System.out.println("Doriti sa inchideti programul ? -> 16");
+            System.out.println("Modifica mancarea -> 15");
+            System.out.println("Sterge o mancare  -> 16");
+            System.out.println("Modifica salariu sofer -> 17");
+            System.out.println("Sterge sofer -> 18");
+            System.out.println("Modifica comanda -> 19");
+            System.out.println("Sterge comanda -> 20");
+            System.out.println("Modifica localitate -> 21");
+            System.out.println("Sterge localitate -> 22");
+            System.out.println("Doriti sa inchideti programul ? -> 100");
             System.out.println("Introduceti raspunsul :");
             choice = Integer.parseInt(scanner.nextLine());
             int actiune;
@@ -39,7 +43,6 @@ public class Main {
                     String den = scanner.nextLine();
                     System.out.println("Nivelul de dificultate : ");
                     int dif = Integer.parseInt(scanner.nextLine());
-                    Services.adaugaMancare(dif, den);
                     System.out.println("Doriti sa mai adaugati mancare ? ");
                     System.out.println("1 -> DA");
                     System.out.println("2 -> NU");
@@ -47,24 +50,13 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
-                    addMancare.getMancare().mancareAdd(den,dif);
+                    MySQL.SqlConfig.insert_mancare(dif,den);
                     actionTracker.getAction().trackAction("Adaugat mancare");
                 } while (actiune == 1);
             }
-
             else if (choice == 2) {
-                Services.getMancare().forEach((iteraror) -> {
-                    System.out.println("Denumire mancare : " + iteraror.getDenumire());
-                    System.out.println("Dificultate mancare : " + iteraror.getDificultate());
-                });
+                MySQL.SqlConfig.select_mancare();
                 actionTracker.getAction().trackAction("Afisare lista mancare");
-            }else if (choice == 15){
-                ArrayList<String> al= new ArrayList<>();
-                Services.getMancare().forEach((iteraror) -> al.add(iteraror.getDenumire()));
-                Collections.sort(al);
-                for (String s : al) {
-                    System.out.println(s);
-                }
             }
             else if (choice == 3) {
                 do {
@@ -85,7 +77,7 @@ public class Main {
                     int bool1 = Integer.parseInt(scanner.nextLine());
                     boolean per;
                     per = bool1 == 1;
-                    Services.adaugaLocalitate(nume, loc, dBune, per);
+                    MySQL.SqlConfig.insert_localitate(nume,loc,dBune,per);
                     System.out.println("Localitatea a fost adaugata ! ");
                     System.out.println("Doriti sa mai adaugati o localitate ? ");
                     System.out.println("1 -> DA");
@@ -94,24 +86,10 @@ public class Main {
                     if (ans == 2) {
                         actiune = 0;
                     }
-                    addLocalitate.getLocalitate().localitateAdd(nume,loc,dBune,per);
                     actionTracker.getAction().trackAction("Adaugare localitate");
                 } while (actiune == 1);
             } else if (choice == 4) {
-                Services.getLocalitate().forEach((iteraror) -> {
-                    System.out.println("Numele localitati : " + iteraror.getDenumire());
-                    System.out.println(" Numar de locuitori : " + iteraror.getNrLocuitori());
-                    if (iteraror.isDrumuriBune()) {
-                        System.out.println("Localitatea are drumuri bune ! ");
-                    } else {
-                        System.out.println("Localitatea nu are drumuri bune ! ");
-                    }
-                    if (iteraror.isPericuloasa()) {
-                        System.out.println("Localitatea este periculoasa ! ");
-                    } else {
-                        System.out.println("Localitatea nu este periculoasa ! ");
-                    }
-                });
+                MySQL.SqlConfig.select_localitate();
                 actionTracker.getAction().trackAction("Afisare lista localitati");
             } else if (choice == 5) {
                 do {
@@ -178,7 +156,7 @@ public class Main {
                     int timpPrep = Integer.parseInt(scanner.nextLine());
                     System.out.println("Numarul de produse : ");
                     int nrProd = Integer.parseInt(scanner.nextLine());
-                    Services.adaugaComanda(nrCom, timpPrep, nrProd);
+                    MySQL.SqlConfig.insert_comanda(nrCom,timpPrep,nrProd);
                     System.out.println("Comanda a fost adaugata !");
                     System.out.println("Doriti sa mai adaugati o comanda ? ");
                     System.out.println("1 -> DA");
@@ -188,14 +166,9 @@ public class Main {
                         actiune = 0;
                     }
                     actionTracker.getAction().trackAction("Adaugare comanda");
-                    addComanda.getComanda().comandaAdd(nrCom,timpPrep,nrProd);
                 } while (actiune == 1);
             } else if (choice == 8) {
-                Services.getComanda().forEach((iteraror) -> {
-                    System.out.println("Numarul comenzi este : " + iteraror.getNrComanda());
-                    System.out.println("Timpul de preparare al comenzi este ( in minute ) : " + iteraror.getTimpPreparare());
-                    System.out.println("Numarul de produse din comanda este de : " + iteraror.getNrProduse());
-                });
+                MySQL.SqlConfig.select_comanda();
                 actionTracker.getAction().trackAction("Afisare comenzi");
             } else if (choice == 9) {
                 do {
@@ -273,7 +246,7 @@ public class Main {
                     int bool0 = Integer.parseInt(scanner.nextLine());
                     boolean inCursa;
                     inCursa = bool0 == 1;
-                    Services.adaugaSofer(numSof, prenSof, genSof, varSof, salSof, vecSof, vehicul, aniExp, inCursa);
+                    MySQL.SqlConfig.insert_sofer(numSof,prenSof,genSof,varSof,salSof,vecSof,vehicul,aniExp,inCursa);
                     System.out.println("Soferul a fost adaugat ! ");
                     System.out.println("Doriti sa mai adaugati un sofer ? ");
                     System.out.println("1 -> DA");
@@ -283,26 +256,10 @@ public class Main {
                         actiune = 0;
                     }
                     actionTracker.getAction().trackAction("Adaugare sofer");
-                    addSofer.getSofer().soferAdd(numSof,prenSof,genSof,varSof,vecSof,vehicul,aniExp,inCursa);
                 } while (actiune == 1);
             } else if (choice == 12) {
-                Services.getSofer().forEach((iteraror) -> {
-                    System.out.println("Numele soferului : " + iteraror.getNume());
-                    System.out.println("Prenumele soferului : " + iteraror.getPrenume());
-                    System.out.println("Genul soferului : " + iteraror.getGen());
-                    System.out.println("Varsta soferului : " + iteraror.getVarsta());
-                    System.out.println("Salariul soferului : " + iteraror.getSalariu());
-                    System.out.println("Vechimea soferului : " + iteraror.getVechime());
-                    System.out.println("Ani de experienta ai soferului : " + iteraror.getExperienta());
-                    System.out.println("Soferul conduce : " + iteraror.getVehicul());
-                    if (iteraror.isInCursa()) {
-                        System.out.println("Soferul se afla in cursa ! ");
-                    } else {
-                        System.out.println("Soferul nu se afla in cursa ! ");
-                    }
-                    actionTracker.getAction().trackAction("Afisare soferi");
-
-                });
+                MySQL.SqlConfig.select_sofer();
+                actionTracker.getAction().trackAction("Afisare soferi");
             } else if (choice == 13) {
                 do {
                     actiune = 1;
@@ -337,7 +294,8 @@ public class Main {
                     actionTracker.getAction().trackAction("Adaugare bucatar");
                 } while (actiune == 1);
             } else if (choice == 14) {
-                Services.getBucatar().forEach((iteraror) -> {
+
+               Services.getBucatar().forEach((iteraror) -> {
                     System.out.println("Nume : " + iteraror.getNume());
                     System.out.println("Prenume : " + iteraror.getPrenume());
                     System.out.println("Varsta : " + iteraror.getVarsta());
@@ -346,7 +304,94 @@ public class Main {
                 });
                 actionTracker.getAction().trackAction("Afisare bucatari");
             }
-        } while (choice != 16);
+            else if (choice == 15){
+                System.out.println("Lista de mancaruri");
+                MySQL.SqlConfig.select_mancare();
+                System.out.println("Modifica denumirea unui tip de mancare - 1");
+                System.out.println("Modifica dificultatea unui tip de mancare -2");
+                System.out.println("Raspuns : ");
+                int ans = Integer.parseInt(scanner.nextLine());
+
+                if(ans == 1){
+                    System.out.println("ID-ul mancari al caruit nume doriti sa il modificati");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Numele nou");
+                    String numenou = scanner.nextLine();
+                    MySQL.SqlConfig.update_mancare_denumire(id,numenou);}
+
+                else if (ans == 2){
+                    System.out.println("ID-ul mancari acarei dificultate doriti sa o modificati");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Noua dificultate");
+                    int difnoua = Integer.parseInt(scanner.nextLine());
+                    MySQL.SqlConfig.update_mancare_dificultate(id,difnoua);
+                    actionTracker.getAction().trackAction("Modificari mancare");
+                }
+            }else if (choice == 16){
+                System.out.println("Lista de mancaruri");
+                MySQL.SqlConfig.select_mancare();
+                System.out.println("ID-ul mancari acarei dificultate doriti sa o modificati");
+                int id = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.delete_mancare(id);
+                actionTracker.getAction().trackAction("Sterge Mancare");
+            }
+            else if (choice ==  17){
+                System.out.println("Lista soferi");
+                MySQL.SqlConfig.select_sofer();
+                System.out.println("ID-ul soferului al carui salariu doresti sa il modifici:");
+                int id = Integer.parseInt(scanner.nextLine());
+                System.out.println("Noul salariu:");
+                int saln = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.update_sofer_salariu(id,saln);
+                actionTracker.getAction().trackAction("Modificare salariu sofer");
+            }
+            else if (choice == 18){
+                System.out.println("Lista soferi");
+                MySQL.SqlConfig.select_sofer();
+                System.out.println("ID-ul soferului pe care doriti sa il stergeti");
+                int id = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.delete_sofer(id);
+                actionTracker.getAction().trackAction("Sterge sofer");
+            }
+            else if (choice == 19){
+                System.out.println("Lista comenzi");
+                MySQL.SqlConfig.select_comanda();
+                System.out.println("ID-ul comenzi al carui numar de produse doriti sa il modificati: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                System.out.println("Numarul de produse: ");
+                int nrprodnou = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.update_nr_produse(id,nrprodnou);
+                actionTracker.getAction().trackAction("Modificare comanda");
+            }
+            else if (choice == 20){
+                System.out.println("Lista comenzi");
+                MySQL.SqlConfig.select_comanda();
+                System.out.println("ID-ul comenzi pe care doriti sa o stergeti: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.delete_comanda(id);
+                actionTracker.getAction().trackAction("Sterge comanda");
+            }
+            else if (choice == 21){
+                System.out.println("Lista localitati");
+                MySQL.SqlConfig.select_localitate();
+                System.out.println("Id-ul localitatii a carei populatie doriti sa o modificati:");
+                int id = Integer.parseInt(scanner.nextLine());
+                System.out.println("Populatie noua:");
+                int popnou = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.update_populatie_localitate(id,popnou);
+                actionTracker.getAction().trackAction("Modifica localitate");
+            }
+            else if (choice == 22){
+                System.out.println("Lista localitati");
+                MySQL.SqlConfig.select_localitate();
+                System.out.println("Id-ul localitatii pe care doriti sa o stergeti:");
+                int id = Integer.parseInt(scanner.nextLine());
+                MySQL.SqlConfig.delete_localitate(id);
+                actionTracker.getAction().trackAction("Sterge localitate");
+            }
+
+        } while (choice != 100);
+        MySQL.SqlConfig.closeDataBaseConnection();
         actionTracker.getAction().trackAction("Inchide program");
         System.out.println("Programul se inchide ! Multumim !");
     }

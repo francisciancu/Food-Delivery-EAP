@@ -10,7 +10,7 @@ public class fileReader {
     //Citire Mancare
     public static Vector<Mancare> readMancare() {
         Vector<Mancare> mancare = new Vector<Mancare>();
-        try (Reader in = new FileReader("src/project/Mancare.csv")) {
+        try (Reader in = new FileReader("src/main/java/project/Mancare.csv")) {
             Iterable<CSVRecord> records = CSVFormat.DEFAULT
                     .withHeader(new String[]{"Denumire", "Dificultate","Data adaugarii"})
                     .withFirstRecordAsHeader()
@@ -28,7 +28,7 @@ public class fileReader {
     //Citire Comenzi
     public static Vector<Comanda> readComanda(){
         Vector<Comanda> comanda = new Vector<Comanda>();
-        try(Reader in = new FileReader("src/project/Comenzi.csv")){
+        try(Reader in = new FileReader("src/main/java/project/Comenzi.csv")){
             Iterable<CSVRecord> records = CSVFormat.DEFAULT
                     .withHeader(new String[]{"Numar Comanda", "Timp Preparare", "Numar Produse", "Data adaugarii"})
                     .withFirstRecordAsHeader()
@@ -46,7 +46,7 @@ public class fileReader {
     //Citire Bucatar
     public static Vector<Bucatar> readBucatar(){
         Vector<Bucatar> bucatar = new Vector<Bucatar>();
-        try(Reader in = new FileReader("src/project/Bucatari.csv")){
+        try(Reader in = new FileReader("src/main/java/project/Bucatari.csv")){
             Iterable<CSVRecord> records = CSVFormat.DEFAULT
                     .withHeader(new String[]{"Nume" , "Prenume" , "Gen" , "Varsta" , "Salariu" , "Vechime" , "Ani de experienta", "Nivel indemanare" ,"Data adaugarii"})
                     .withFirstRecordAsHeader()
@@ -63,7 +63,7 @@ public class fileReader {
     //Citire Local
     public static Vector<Local> readLocal(){
         Vector<Local> local = new Vector<Local>();
-        try(Reader in = new FileReader("src/project/Local.csv")){
+        try(Reader in = new FileReader("src/main/java/project/Local.csv")){
             Iterable<CSVRecord> records = CSVFormat.DEFAULT
                     .withHeader(new String[]{"Livreaza pe drumuri stricate" , "Livreaza in localitati persiculoase" , "Nume" , "Adresa" , "Numar angajati" , "Numar clienti" , "Stele" , "Numar minim de populatie pentru a livra" , "Data adaugarii"})
                     .withFirstRecordAsHeader()
